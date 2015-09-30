@@ -1,7 +1,7 @@
 var app = angular.module("grockr", ['ui.router','angularModalService'])
 app.config(function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise("/home");
+  $urlRouterProvider.otherwise("/");
   $stateProvider
     .state('home', {
       url: "/",

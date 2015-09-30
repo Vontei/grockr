@@ -7,9 +7,10 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+require('dotenv').load()
+var session = require('cookie-session')
 
 var app = express();
-
 
 var http = require('http');
 var ecstatic = require('ecstatic');
