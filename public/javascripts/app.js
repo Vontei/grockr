@@ -1,15 +1,15 @@
 var app = angular.module("grockr", ['ui.router','angularModalService'])
 app.config(function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise("/");
+  $urlRouterProvider.otherwise("/home");
   $stateProvider
-    .state('home', {
+    .state('splash', {
       url: "/",
       templateUrl: "partials/splash.html"
     })
-    .state('about', {
-      url: "/about",
-      templateUrl: "partials/about.html"
+    .state('dash', {
+      url: "/dash",
+      templateUrl: "partials/dash.html"
     })
 
 });

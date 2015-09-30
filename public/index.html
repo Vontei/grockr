@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<html ng-app='grockr'>
+<html>
   <head>
-    <title></title>
+    <title>grockr</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
-    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <script src="/bower_components/angular/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
     <link rel='stylesheet' href='http://bootswatch.com/cyborg/bootstrap.min.css'/>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
     <script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
     <script src="http://www.amcharts.com/lib/3/serial.js"></script>
     <script src="http://www.amcharts.com/lib/3/themes/chalk.js"></script>
     <script src="http://www.amcharts.com/lib/3/themes/light.js"></script>
-
     <script src="http://www.amcharts.com/lib/3/amstock.js"></script>
-    <script src="./javascripts/chart.js"></script>
   </head>
 
-  <body>
-<!--
-    <div class="nav-side-menu">
+  <body ng-app='grockr'>
+
+    <a ui-sref="home">Home</a>
+    <a ui-sref="dash">About</a>
+    <div ui-view></div>
+
+    <!-- <div class="nav-side-menu">
       <div class="brand">grockr</div>
       <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
       <div class="menu-list">
@@ -162,17 +161,16 @@
         <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
       </div>
     </div>
-  </div>
+  </div> -->
+  <script src="/bower_components/angular/angular.js"></script>
+  <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/angular-modal-service/dst/angular-modal-service.min.js"></script>
 
-
- -->
- <h1>Hi</h1>
- <div class="container">
-   <div ui-view></div>
- </div>
-
-
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+  <script src="./javascripts/chart.js"></script>
+  <script src="./javascripts/app.js"></script>
+  <script src="./javascripts/controllers.js"></script>
 
   </body>
 </html>
