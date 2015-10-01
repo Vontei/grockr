@@ -14,10 +14,13 @@
     "dotenv": "^1.2.0",
     "ecstatic": "^1.0.1",
     "express": "~4.12.4",
+    "eyes": "^0.1.8",
     "jade": "~1.9.2",
     "mongoose": "^4.1.8",
     "morgan": "~1.5.3",
     "sass": "^0.5.0",
-    "serve-favicon": "~2.2.1"
+    "serve-favicon": "~2.2.1",
+    "unirest": "^0.4.2",
+    "xml2js": "^0.4.12"
   }
 }
