@@ -8,7 +8,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
     })
     .state('dash', {
       url: "/dash",
-      templateUrl: "partials/dash.html"
+      templateUrl: "partials/dash.html",
+      controller: 'yahooController'
     })
   $urlRouterProvider.otherwise("home");
 

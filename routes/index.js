@@ -7,22 +7,27 @@ var unirest = require('unirest');
 var eyes = require('eyes')
 var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
-var stock = require('../lib/logic.js');
 
 
-router.get('/index', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+router.get('/yahoo', function(req, res, next) {
+    var answer = { people:
+      [
+      {name: 'hi', age: '25'},
+      {name: 'nick', age: '27'}
+    ]
+    };
+    res.json(answer)
 });
 
 
-router.post('/', function(req,res,next){
+router.post('/yahoo', function(req,res,next){
   var query = req.body.search;
   var req = unirest.get('http://www.enclout.com/api/v1/yahoo_finance/show.json?auth_token=' + process.env.KEY + '&text=' + query)
     .header("X-Mashape-Key", process.env.KEY3)
     .header("Accept", "application/json")
     .end(function (result) {
     console.log(result.body);
-    res.render('index', {res: result.body});
+    res.json(result.body);
 })
 })
 
