@@ -4,7 +4,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('splash', {
       url: "/",
-      templateUrl: "partials/splash.html"
+      templateUrl: "partials/splash.html",
+      controller: "xhrController"
     })
     .state('dash', {
       url: "/dash",
