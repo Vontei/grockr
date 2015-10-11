@@ -3,16 +3,20 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
     .state('splash', {
-      url: "/",
+      url: "/splash",
       templateUrl: "partials/splash.html",
-      controller: "xhrController"
+      controller: "xhrController",
     })
     .state('dash', {
       url: "/dash",
       templateUrl: "partials/dash.html",
       controller: 'yahooController'
     })
-  $urlRouterProvider.otherwise("home");
+    .state('landing', {
+      url: "/",
+      templateUrl: "partials/landing.html",
+    })
+  // $urlRouterProvider.otherwise("home");
 
 });
 

@@ -25,7 +25,7 @@ function generateChartData() {
 var chart = AmCharts.makeChart( "chartdiv", {
 
   type: "stock",
-  "theme": "chalk",
+  "theme": "light",
 
   categoryAxesSettings: {
     minPeriod: "mm"
@@ -100,7 +100,7 @@ var chart = AmCharts.makeChart( "chartdiv", {
     periods: [ {
       period: "hh",
       count: 1,
-      label: "1 hour",
+       label: "1 hour",
       selected: true
 
     }, {

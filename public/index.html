@@ -4,7 +4,7 @@
     <title>grockr</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel='stylesheet' href='http://bootswatch.com/slate/bootstrap.min.css'/>
+    <link rel='stylesheet' href='http://bootswatch.com/{{theme}}/bootstrap.min.css'/>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
@@ -13,7 +13,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
     <script src="http://www.amcharts.com/lib/3/amcharts.js"></script>
     <script src="http://www.amcharts.com/lib/3/serial.js"></script>
-    <script src="http://www.amcharts.com/lib/3/themes/chalk.js"></script>
     <script src="http://www.amcharts.com/lib/3/themes/light.js"></script>
     <script src="http://www.amcharts.com/lib/3/amstock.js"></script>
     <script src="./javascripts/app.js"></script>
@@ -23,11 +22,24 @@
 
   <body>
     <div class="nav-side-menu">
-      <div class="brand"><a ui-sref='home'> grockr</a></div>
+      <div class="brand"><a ui-sref='splash'>grockr</a></div>
       <div class="brand">
         <select ng-model='theme'>
+          <option value=''>grockr</option>
           <option value='cyborg'>cyborg</option>
           <option value='slate'>slate</option>
+          <option value='paper'>paper</option>
+          <option value='journal'>journal</option>
+          <option value='cerulean'>cerulean</option>
+          <option value='cosmo'>cosmo</option>
+          <option value='flatly'>flatly</option>
+          <option value='darkly'>darkly</option>
+          <option value='readable'>readable</option>
+          <option value='lumen'>lumen</option>
+          <option value='simplex'>simplex</option>
+          <option value='spacelab'>spacelab</option>
+          <option value='superhero'>superhero</option>
+          <option value='yeti'>yeti</option>
         </select>
       </div>
       <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
@@ -35,7 +47,7 @@
         <ul id="menu-content" class="menu-content collapse out">
           <li>
             <a ui-sref="dash">
-              <i class="fa fa-line-chart">  </i>Dashboard
+              <i class="fa fa-line-chart"></i>Dashboard
             </a>
           </li>
 
