@@ -42,34 +42,20 @@ app.controller('xhrController', ['$scope','$http',
   }
 }
 ])
-//
-//
-// app.controller('stockController', ['$scope','$http',
-//   function($scope, $http){
-//     $scope.getStockData = function(){
-//       $http.get('http://localhost:8080/account').then(function (data) {
-//         console.log(data)
-//         $scope.stockPrice = data.data;
-//       })
-//     }
-//
-//   }
-// ])
 
 
+app.controller('newAccount', ["$scope", "$http",
+  function($scope, $http){
+    $scope.createAccount = function(credentials){
+      $http.post('http://localhost:8080/account/new', credentials).then(function (data) {
+        console.log(data);
+      })
+    }
+  }
 
-// app.controller('movieController', ["$scope","$http",
-//   function ($scope, $http) {
-//     $scope.message = "Welcome!"
-//     $scope.getMovie = function(){
-//       $http.get('http://www.omdbapi.com/?s='+ $scope.search).then(function (data) {
-//         console.log(data)
-//         $scope.results = data.data.Search
-//         $scope.search = ''
-//       })
-//     }
-// }])
-//
+
+])
+
 //
 // app.controller('filmController', ["$scope",'$http','$routeParams',
 //   function($scope, $http, $routeParams){
