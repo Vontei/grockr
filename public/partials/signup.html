@@ -1,0 +1,15 @@
+<div ng-controller="DemoCtrl" layout="column" ng-cloak>
+  <br/>
+  <md-content layout-padding class="autoScroll">
+    <md-input-container class="md-icon-float" >
+      <label>Name</label>
+      <input ng-model="user.userName" type="text" ng-required="true">
+    </md-input-container>
+    <md-input-container md-no-float>
+      <input ng-model="user.password" type="password" placeholder="Password" ng-required="true">
+    </md-input-container>
+    <md-input-container >
+      <input ng-model="user.passwordConf" type="password" placeholder="Password Confirmation" ng-required="true">
+    </md-input-container>
+  </md-content>
+</div>

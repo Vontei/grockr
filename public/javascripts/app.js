@@ -1,4 +1,4 @@
-var app = angular.module("grockr", ['ui.router','angularModalService'])
+var app = angular.module("grockr", ['ui.router','angularModalService','ngMaterial'])
 app.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
@@ -60,6 +60,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: "partials/members.html",
         // controller: "ordersController",
     })
+    .state('home.dash.signup', {
+        url: "/access",
+        templateUrl: "partials/signup.html",
+        controller: "DemoCtrl"
+    })
+
   // $urlRouterProvider.otherwise("home");
 
 });

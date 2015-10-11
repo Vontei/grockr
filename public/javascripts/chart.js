@@ -20,9 +20,9 @@ function generateChartData() {
     } );
   }
   return chartData;
-}
+};
 
-var chart = AmCharts.makeChart( "chartdiv", {
+var chart = (AmCharts.makeChart( "chartdiv", {
 
   type: "stock",
   "theme": "light",
@@ -129,4 +129,4 @@ var chart = AmCharts.makeChart( "chartdiv", {
     "enabled": true,
     "position": "bottom-right"
   }
-} );
+} ));
