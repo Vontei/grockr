@@ -9,6 +9,12 @@ app.controller('yahooController', ['$scope','$http',
 }]);
 
 
+app.controller('dashThemeController', ["$scope",
+  function($scope){
+    $scope.theme = $scope.selectTheme;
+  }
+])
+
 app.controller('xhrController', ['$scope','$http',
   function($scope, $http){
     $scope.java= function(){

@@ -10,7 +10,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('dash', {
       url: "/dash",
       templateUrl: "partials/dash.html",
-      // controller: 'dashController'
+      controller: 'dashThemeController'
     })
     .state('dash.level1', {
       url: "/level1",
