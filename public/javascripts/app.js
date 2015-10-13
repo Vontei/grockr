@@ -89,6 +89,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: "partials/portal.html",
         // controller: "DemoCtrl"
     })
+    .state('dash.library', {
+        url: "/library",
+        templateUrl: "partials/library.html",
+        // controller: "DemoCtrl"
+    })
     .state('dash.portal.login', {
         url: "/login",
         templateUrl: "partials/login.html",
