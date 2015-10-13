@@ -69,10 +69,35 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: "partials/members.html",
         // controller: "ordersController",
     })
-    .state('dash.signup', {
-        url: "/access",
+    // .state('dash.signup', {
+    //     url: "/access",
+    //     templateUrl: "partials/signup.html",
+    //     controller: "DemoCtrl"
+    // })
+    .state('dash.calculator', {
+        url: "/calculator",
+        templateUrl: "partials/calculator.html",
+        // controller: "DemoCtrl"
+    })
+    .state('dash.intro', {
+        url: "/intro",
+        templateUrl: "partials/intro.html",
+        // controller: "DemoCtrl"
+    })
+    .state('dash.portal', {
+        url: "/portal",
+        templateUrl: "partials/portal.html",
+        // controller: "DemoCtrl"
+    })
+    .state('dash.portal.login', {
+        url: "/login",
+        templateUrl: "partials/login.html",
+        // controller: "DemoCtrl"
+    })
+    .state('dash.portal.register', {
+        url: "/register",
         templateUrl: "partials/signup.html",
-        controller: "DemoCtrl"
+        // controller: "DemoCtrl"
     })
 
 

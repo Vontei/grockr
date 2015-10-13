@@ -1,6 +1,7 @@
 
 
 @import url('http://fonts.googleapis.com/css?family=Covered+By+Your+Grace');
+@import url(https://fonts.googleapis.com/css?family=Poiret+One|Nunito|Josefin+Sans:400,700|Source+Code+Pro|Comfortaa);
 #chartdiv {
 	// background: #282828 url('http://www.amcharts.com/lib/3/patterns/light/bg.jpg');color: #fff;
 	width	: 100%;
@@ -171,13 +172,12 @@
 }
 
 #landingBlock{
-	position: relative;
-	background-color: rgb(127, 255, 124);
-	top: 0;
 	height: 30%;
 	width: 100%;
-text-align: center;
+	text-align: center;
 	margin: 0 auto;
+	margin-top: 20%;
+
 }
 
 
@@ -259,6 +259,19 @@ text-align: center;
 	margin: 0 auto;
 	margin-top: 5%;
 
+}
+
+h1 titleBlock{
+font-family: 'Nunito', sans-serif;
+}
+
+#dashBrand{
+	color: #DCFA16;
+	padding: 10px;
+}
+
+.nav-side-menu{
+	color: #DCFA16;
 }
 
 /*# sourceMappingURL=style.css.map */

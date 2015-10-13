@@ -1,6 +1,6 @@
 <div class="nav-side-menu">
-  <div class="brand"><a ui-sref='splash'>grockr</a></div>
-  <div class="brand">
+  <div class="brand"><h3 id='dashBrand' ui-sref='splash'>grockr</h3></div>
+  <!-- <div class="brand">
     <select ng-model='selectTheme'>
       <option value=''>grockr</option>
       <option value='cyborg'>cyborg</option>
@@ -18,17 +18,17 @@
       <option value='superhero'>superhero</option>
       <option value='yeti'>yeti</option>
     </select>
-  </div>
+  </div> -->
   <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
   <div class="menu-list">
     <ul id="menu-content" class="menu-content collapse out">
       <li>
-        <a ui-sref="home">
-          <i class="fa fa-line-chart"></i>Dashboard
+        <a ui-sref=".intro">
+          <i class="fa fa-line-chart"></i>Intro
         </a>
       </li>
 
-      <li  data-toggle="collapse" data-target="#products" class="collapsed active">
+      <!-- <li  data-toggle="collapse" data-target="#products" class="collapsed active">
         <a href="#"><i class="fa fa-university"></i></i>Stocks<span class="arrow"></span></a>
       </li>
       <ul class="sub-menu collapse" id="products">
@@ -39,7 +39,7 @@
           <li><a href="#">Coffee</a></li>
           <li><a href="#">Sugar</a></li>
           <li><a href="#">Soybeans</a></li>
-      </ul>
+      </ul> -->
 
       <li data-toggle="collapse" data-target="#service" class="collapsed">
         <a href="#"><i class="fa fa-graduation-cap"></i>Lessons<span class="arrow"></span></a>
@@ -47,22 +47,22 @@
       <ul class="sub-menu collapse" id="service">
         <li ui-sref='.level1'>Level 1</li>
         <li ui-sref='.level2'>Level 2</li>
-        <li ui-sref='.level3'>Level 3</li>
-        <li ui-sref='.level4'>Level 4</li>
+        <!-- <li ui-sref='.level3'>Level 3</li>
+        <li ui-sref='.level4'>Level 4</li> -->
       </ul>
 
-
-       <li ui-sref='.profile'>
-        <i class="fa fa-user fa-lg"></i> Profile
+      <li ui-sref='.calculator'>
+         <a href="#"><i class="fa fa-calculator"></i>Calculator</a>
       </li>
 
-       <li ui-sref='.members'>
-        <i class="fa fa-users fa-lg"></i> Members
+      <li ui-sref='.orders'>
+        <a href="#"><i class="fa fa-rocket"></i>Orders</a>
       </li>
 
-      <li ui-sref='.signup'>
-        <i class="fa fa-github"></i>Access
+       <li ui-sref='.portal'>
+         <a href="#"><i class="fa fa-users fa-lg"></i> Members Login</a>
       </li>
+
     </ul>
    </div>
 </div>

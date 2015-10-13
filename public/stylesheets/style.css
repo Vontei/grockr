@@ -1,4 +1,5 @@
 @import url("http://fonts.googleapis.com/css?family=Covered+By+Your+Grace");
+@import url(https://fonts.googleapis.com/css?family=Poiret+One|Nunito|Josefin+Sans:400,700|Source+Code+Pro|Comfortaa);
 @import url("http://fonts.googleapis.com/css?family=Covered+By+Your+Grace");
 #chartdiv {
   width: 100%;
@@ -158,13 +159,11 @@ body {
   float: right; }
 
 #landingBlock {
-  position: relative;
-  background-color: #7fff7c;
-  top: 0;
   height: 30%;
   width: 100%;
   text-align: center;
-  margin: 0 auto; }
+  margin: 0 auto;
+  margin-top: 20%; }
 
 #CHARTcontainer {
   box-shadow: 3px 9px 24px -3px rgba(0, 0, 0, 0.75);
@@ -232,6 +231,16 @@ body {
   width: 90%;
   margin: 0 auto;
   margin-top: 5%; }
+
+h1 titleBlock {
+  font-family: 'Nunito', sans-serif; }
+
+#dashBrand {
+  color: #DCFA16;
+  padding: 10px; }
+
+.nav-side-menu {
+  color: #DCFA16; }
 
 /*# sourceMappingURL=style.css.map */
 .btn3d {
@@ -312,5 +321,9 @@ body {
 .btn3d.btn-danger:active, .btn3d.btn-danger.active {
   box-shadow: 0 0 0 1px #b93802 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
   background-color: #D73814; }
+
+#titleBlock {
+  color: red;
+  font-family: sans-serif; }
 
 /*# sourceMappingURL=style.css.map */
