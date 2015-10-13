@@ -7,30 +7,39 @@ app.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "partials/landing.html",
       // controller: "homeController"
     })
-    .state('home.dash', {
+    .state('dash', {
       url: "/dash",
       templateUrl: "partials/dash.html",
       // controller: 'dashController'
     })
-    .state('home.dash.level1', {
+    .state('dash.level1', {
       url: "/level1",
       templateUrl: "partials/level1.html",
       // controller: "level1Controller"
-
     })
-    .state('home.dash.level2', {
+    .state('dash.level1.chart', {
+      url: "/chart",
+      templateUrl: "partials/chart.html",
+      controller: 'highchart'
+    })
+    .state('dash.level1.lesson1', {
+      url: "/chart",
+      templateUrl: "partials/lesson1.html",
+      // controller: 'highchart'
+    })
+    .state('dash.level2', {
       url: "/level2",
       templateUrl: "partials/level2.html",
       // controller: "level2Controller"
 
     })
-    .state('home.dash.level3', {
+    .state('dash.level3', {
       url: "/level3",
       templateUrl: "partials/level3.html",
       // controller: "level3Controller"
 
     })
-    .state('home.dash.level4', {
+    .state('dash.level4', {
       url: "/level4",
       templateUrl: "partials/level4.html",
       // controller: "level4Controller"
@@ -40,31 +49,32 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: "partials/splash.html",
         // controller: "splashController",
     })
-    .state('home.dash.profile', {
+    .state('dash.profile', {
         url: "/profile",
         templateUrl: "partials/profile.html",
         // controller: "profileController",
     })
-    .state('home.dash.account', {
+    .state('dash.account', {
         url: "/account",
         templateUrl: "partials/profile.html",
         // controller: "accountController",
     })
-    .state('home.dash.orders', {
+    .state('dash.orders', {
         url: "/orders",
         templateUrl: "partials/orders.html",
         // controller: "ordersController",
     })
-    .state('home.dash.members', {
+    .state('dash.members', {
         url: "/members",
         templateUrl: "partials/members.html",
         // controller: "ordersController",
     })
-    .state('home.dash.signup', {
+    .state('dash.signup', {
         url: "/access",
         templateUrl: "partials/signup.html",
         controller: "DemoCtrl"
     })
+
 
   // $urlRouterProvider.otherwise("home");
 
