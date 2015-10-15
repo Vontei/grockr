@@ -15,17 +15,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('dash.level1', {
       url: "/level1",
       templateUrl: "partials/level1.html",
-      // controller: "level1Controller"
+      controller: "stockController"
     })
     .state('dash.level1.lesson1', {
       url: "/lesson1",
       templateUrl: "partials/lesson1.html",
-      // controller: 'highchart'
+      // controller: "stockController"
     })
     .state('dash.level1.stock1', {
       url: "/stock1",
       templateUrl: "partials/stock1.html",
-      controller: "stock1Controller"
+      // controller: "stockController"
     })
     .state('dash.level1.chart', {
       url: "/chart",
@@ -106,7 +106,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('dash.calculator', {
         url: "/calculator",
         templateUrl: "partials/calculator.html",
-        controller: "calculatorController"
+        controller: 'whatIfController',
     })
     .state('dash.intro', {
         url: "/intro",

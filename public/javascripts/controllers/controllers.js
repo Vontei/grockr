@@ -1,9 +1,11 @@
-app.controller('yahooController', ['$scope','$http',
+app.controller('stockController', ['$scope','$http',
   function($scope, $http){
   $scope.getYahoo = function(){
-    console.log('GET is WORKING')
-    $http.get('/yahoo').then(function (data) {
-      console.log('Your response' , data)
+    $http.get('http://localhost:8080/yahoo').then(function (data) {
+      console.log(data)
+      $scope.msft = data.data[0];
+      $scope.aapl = data.data[1];
+      $scope.goog = data.data[2];
     })
   }
 }]);
@@ -16,6 +18,14 @@ app.controller('cookieController', [
     $cookies.put('myFavorite', 'oatmeal');
   }
 ])
+
+
+// app.controller('stockController', ['$scope','apiService',
+//   function($scope){
+//     var stocks = apiService.getYahoo()
+//     console.log(stocks);
+//   }
+// ])
 
 
 app.controller('xhrController', ['$scope','$http',
@@ -77,6 +87,34 @@ app.controller('loginController', ["$scope", "$http",'$location',
 ])
 
 
+app.controller('whatIfController', ["$scope",
+  function($scope){
+
+    var calculate = function(){
+    var price = parseFloat($scope.price);
+    var wallet = parseFloat($scope.wallet);
+    var profit = parseFloat($scope.profit);
+    var fee = parseFloat($scope.fee);
+    var afford = Math.floor(wallet/price) ;
+    var breakeven = (afford*price)+(2*fee);
+    $scope.afford = afford || 0;
+    $scope.spend = (afford*price) || 0;
+    $scope.breakeven = breakeven || 0;
+    $scope.goal = breakeven+profit || 0;
+    $scope.sell = ((breakeven+profit)/2) || 0;
+  }
+    $scope.$watch('price', calculate)
+    $scope.$watch('wallet', calculate)
+    $scope.$watch('profit', calculate)
+    $scope.$watch('fee', calculate)
+
+
+
+  }
+
+])
+
+
 
 
 //
@@ -109,7 +147,7 @@ app.controller('loginController', ["$scope", "$http",'$location',
 app.controller("highchart", function ($scope) {
   $scope.chart = $(function () {
       $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function (data) {
-          $('#CHART2container').highcharts('StockChart', {
+          $('#CHARTcontainer').highcharts('StockChart', {
               rangeSelector : {
                   selected : 1
               },
@@ -142,6 +180,7 @@ app.controller("highchart", function ($scope) {
   });
 
 })
+
 app.controller("highchart2", function ($scope) {
   $scope.chart2 = $(function () {
       $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=goog-c.json&callback=?', function (data) {
@@ -176,31 +215,9 @@ app.controller("highchart2", function ($scope) {
           });
       });
   });
-
 })
 
 
-
-app.controller('calculatorController', ["$scope",
-  function($scope){
-    var qty = $scope.quantity;
-    var stock = $scope.stock;
-    var start = $scope.priceStart;
-    var end = $scope.priceEnd;
-    var brokerFee = $scope.fee * 2;
-    if(start>end){
-      $scope.winloss = 'lost';
-      $scope.color = 'red';
-      $scope.results = "Congratulations, you have traded " + stock + " and made " + ((qty*start)-(qty*end))-brokerFee;
-    } else {
-      $scope.winloss = 'made';
-      $scope.color = 'green';
-      $scope.results = "Your " + stock + " trade has cost you " + (($scope.qty*$scope.end)-($scope.qty*$scope.start))-brokerFee;
-    }
-    console.log($scope.results)
-    console.log($scope.color)
-  }
-])
 
 app.controller('stock1Controller', ["$scope","$http",
   function($scope, $http){

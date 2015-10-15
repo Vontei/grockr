@@ -1,6 +1,26 @@
 @import url("http://fonts.googleapis.com/css?family=Covered+By+Your+Grace");
 @import url(https://fonts.googleapis.com/css?family=Poiret+One|Nunito|Josefin+Sans:400,700|Source+Code+Pro|Comfortaa);
 @import url("http://fonts.googleapis.com/css?family=Covered+By+Your+Grace");
+.calculator {
+  text-decoration: none;
+  text-shadow: none;
+  font-family: nunito;
+  text-align: left;
+  background-color: #651FFF;
+  background-color: #607D8B; }
+  .calculator h4 {
+    text-align: left;
+    color: white; }
+  .calculator input {
+    font-size: 1.5em;
+    color: white; }
+  .calculator label {
+    font-size: 2em;
+    color: #76FF03;
+    color: #FFFF00; }
+  .calculator ::-webkit-input-placeholder {
+    color: white; }
+
 #chartdiv {
   width: 100%;
   height: 350px; }

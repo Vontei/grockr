@@ -1,37 +1,122 @@
-<!-- <div class='container'> -->
-  <h1>Calculate this!</h1>
-  <!-- <div class="row"> -->
-    <div id='librarySearchBar' class="input-group">
-      <label>If I buy...</label>
-      <input ng-model='quantity' type="text" class="form-control"  placeholder="this many...">
-    </div><!-- /input-group -->
-  <!-- </div> -->
-  <!-- <div class="row"> -->
-    <div id='librarySearchBar' class="input-group">
-      <label>Of</label>
-      <input type="text" class="form-control"  placeholder="this stock...">
-    </div><!-- /input-group -->
-  <!-- </div>
-  <div class="row"> -->
-    <div id='librarySearchBar' class="input-group">
-      <label>@</label>
-      <input ng-model='priceStart' type="text" class="form-control"  placeholder="this price...">
-    </div><!-- /input-group -->
-  <!-- </div>
-  <div class="row"> -->
-    <div id='librarySearchBar' class="input-group">
-      <label>And the price goes to</label>
-      <input ng-model='priceEnd' type="text" class="form-control"  placeholder=" $$$ this...">
-    </div><!-- /input-group -->
-    <div id='librarySearchBar' class="input-group">
-      <label>And my broker has charged...</label>
-      <input ng-model='fee' type="text" class="form-control"  placeholder=" per trade">
-    </div><!-- /input-group -->
-  <!-- </div>
-  <div class="row"> -->
-    <div id='librarySearchBar' class="input-group">
-      <label>Then I have <span ng-model='winloss'></span></label>
-      <input type="text" class="form-control"  placeholder='HI' value='{{result}}'>
-    </div><!-- /input-group -->
-  <!-- </div> -->
-<!-- </div> -->
+<div class='container'>
+  <div class='box calculator'>
+    <h4>Simple Buy/Sell</h4>
+    <br>
+    <div class="row" style='text-align:left;'>
+      <div class="col-xs-6 col-sm-4">
+        <div class="input-group">
+          <label>If I buy...</label>
+          <input ng-model='quantity' type="text" class="form-control"  placeholder="this many...">
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-4">
+        <div class="input-group">
+          <label>Of</label>
+          <input ng-model='stock' type="text" class="form-control"  placeholder="this stock...">
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-4">
+        <div class="input-group">
+          <label>@</label>
+          <input ng-model='priceStart' type="text" class="form-control"  placeholder="this price...">
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="row" style='text-align:left;'>
+      <div class="col-xs-6 col-sm-4">
+        <div class="input-group">
+          <label>And the price goes to</label>
+          <input ng-model='priceEnd' type="text" class="form-control"  placeholder=" $$$ this...">
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-4">
+        <div class="input-group">
+          <label>And my broker charged...</label>
+          <input ng-model='fees' type="text" class="form-control"  placeholder=" this much per trade">
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-4">
+        <div class="input-group">
+          <label>Then I will</label>
+          <h5 ng-if='priceStart>priceEnd' style='color: white'> ... lose {{((quantity*priceStart)-(quantity*priceEnd))-(fees*2) | currency }} when I sell {{stock}}.</h5>
+          <h5 ng-if='priceStart<priceEnd' style='color: white'> ... make {{((quantity*priceEnd)-(quantity*priceStart))-(fees*2) | currency}} when I sell {{stock}}.</h5>
+        </div>
+      </div>
+    </div>
+</div>
+  <div class='box calculator' ng-controller='whatIfController'>
+    <h4>What if...</h4>
+    <br>
+    <div class="row" style='text-align:left;'>
+      <div class="col-xs-3 col-sm-6">
+        <div class="input-group">
+          <label>I want to make...</label>
+          <input ng-model='profit' type="text" class="form-control"  placeholder="this much...">
+        </div>
+      </div>
+      <div class="col-xs-3 col-sm-6">
+        <div class="input-group">
+          <label>And I want to spend... </label>
+          <input ng-model='wallet' type="text" class="form-control"  placeholder="this much...">
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div class="row" style='text-align:left;'>
+      <div class="col-xs-3 col-sm-6">
+        <div class="input-group">
+          <label>And my broker charges...</label>
+          <input ng-model='fee' type="text" class="form-control"  placeholder=" this much per trade">
+        </div>
+      </div>
+      <div class="col-xs-3 col-sm-6">
+        <div class="input-group">
+          <label>And a stock is trading at</label>
+          <input ng-model='price' type="text" class="form-control"  placeholder="$$$">
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row" style='text-align:left;'>
+      <div class="col-xs-3 col-sm-6">
+        <div class="input-group">
+          <label>Then you can afford...</label>
+          <h4>{{afford | number:0}} units of stock</h4>
+        </div>
+      </div>
+      <div class="col-xs-3 col-sm-6">
+        <div class="input-group">
+          <label>And you will spend...</label>
+          <h4>{{spend | currency}}</h4>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row" style='text-align:left;'>
+      <div class="col-xs-3 col-sm-6">
+        <div class="input-group">
+          <label>Which means your "breakeven" is...</label>
+          <h4>{{breakeven | currency}}</h4>
+        </div>
+      </div>
+      <div class="col-xs-3 col-sm-6">
+        <div class="input-group">
+          <label>Your order total should be..</label>
+          <h4>{{goal | currency}}</h4>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class='row' style='text-align:left;'>
+      <div class="col-xs-6 col-sm-12">
+        <div class="input-group">
+          <label>So if you buy now, you should sell your stock when the price is...</label>
+          <h4>{{sell | currency}}</h4>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>

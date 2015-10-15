@@ -1,3 +1,30 @@
 $blue: #1F01B9;
 $orange: #FC440F;
 $green: #B4E33D;
+
+
+.calculator{
+  text-decoration: none;
+  text-shadow: none;
+  font-family: nunito;
+  text-align: left;
+  background-color:#651FFF;
+  background-color:#607D8B;
+  h4{
+    text-align: left;
+    color: white;
+  }
+  input{
+    font-size: 1.5em;
+    color: white;
+  }
+  label{
+    font-size: 2em;
+    color:#76FF03;
+    color:#FFFF00;
+  }
+  ::-webkit-input-placeholder {
+    color: white;
+  }
+
+}
