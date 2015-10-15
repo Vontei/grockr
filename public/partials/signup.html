@@ -1,6 +1,6 @@
 <div ng-controller="DemoCtrl" layout="column" ng-cloak>
-<div class='box'>
-  <br/>
+<div class='box' style='text-align: center;'>
+  <!-- <br/>
   <md-content layout-padding class="autoScroll">
     <md-input-container class="md-icon-float" >
       <label>Name</label>
@@ -13,5 +13,35 @@
       <input ng-model="user.passwordConf" type="password" placeholder="Password Confirmation" ng-required="true">
     </md-input-container>
   </md-content>
+</div> -->
+<!-- <h1 ng-click='java()'>
+  HI
+  {{javaResponse}}
+</h1>
+<input ng-model='name' type='text'></input>
+
+  <button ng-click='getStockData()'>GET PRICE</button>
+<input ng-model='num1' type='text'></input>
+<input ng-model='num2' type='text'></input>
+<div>{{stockPrice}}</div>
+<div>{{resultNum}}</div>
+
+
+<form ng-submit='submitForm()'>
+  <input ng-model='trial' type='text'></input>
+  <input type='submit' value='submit'></input>
+</form> -->
+<h1>Sign Up!</h1>
+<form ng-submit='createAccount(credentials)'>
+  <label>Username</label>
+  <input ng-model='credentials.userName' style='text-align: center;' type='text'></input>
+  <label>Password</label>
+  <input ng-model='credentials.password'  style='text-align: center;' type='password'></input>
+  <input type='submit' value='submit'></input>
+</form>
+
+
+
 </div>
+
 </div>

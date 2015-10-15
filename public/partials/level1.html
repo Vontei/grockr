@@ -1,32 +1,10 @@
-<!-- <nav>
-  <ul class="pagination">
-    <li><a ui-sref='.chart'>Chart</a></li>
-    <li><a ui-sref=".lesson1">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-  </ul>
-</nav> -->
+<h2 style="text-align:center;">Level 1</h2>
 <div class='container'>
   <div class='row' style="text-align:center;">
     <button type="button" ui-sref='.lesson1' class="btn3d btn btn-white btn-lg"><span class="fa fa-graduation-cap"></span> Lesson </button>
-    <button type="button" ui-sref='' class="btn3d btn btn-white btn-lg"><span class="fa fa-university"></span> Stock</button>
-    <button type="button" ui-sref='.chart' class="btn3d btn btn-white btn-lg"><span class="fa fa-area-chart"></span> Chart</button>
+    <button type="button" ui-sref='.stock1' class="btn3d btn btn-white btn-lg"><span class="fa fa-university"></span> Stock</button>
+    <button type="button" ui-sref='.chart' ng-click='chart()' class="btn3d btn btn-white btn-lg"><span class="fa fa-area-chart"></span> Chart</button>
   </div>
 </div>
-
-
-
-<!-- <button type="button" class="btn3d btn btn-default btn-lg"><span class="glyphicon glyphicon-download-alt"></span> Default</button>
-<button type="button" class="btn3d btn btn-white btn-lg"><span class="glyphicon glyphicon-tag"></span> White</button>
-<button type="button" class="btn btn-warning btn-lg btn3d"><span class="glyphicon glyphicon-warning-sign"></span> Warning</button>
-
-    <!-- Indicates a dangerous or potentially negative action -->
-    <!-- <button type="button" class="btn btn-danger btn-lg btn3d"><span class="glyphicon glyphicon-remove"></span> Danger</button>
-
-<button type="button" class="btn btn-primary btn-lg btn3d"><span class="glyphicon glyphicon-cloud"></span> Primary</button>
-
-<button type="button" class="btn btn-success btn-lg btn3d"><span class="glyphicon glyphicon-ok"></span> Success</button>
-<button type="button" class="btn btn-info btn-lg btn3d"><span class="glyphicon glyphicon-question-sign"></span> Info</button> -->
 
 <div ui-view></div>

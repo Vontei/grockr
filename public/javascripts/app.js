@@ -10,22 +10,27 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('dash', {
       url: "/dash",
       templateUrl: "partials/dash.html",
-      controller: 'dashThemeController'
+      // controller: 'dashThemeController'
     })
     .state('dash.level1', {
       url: "/level1",
       templateUrl: "partials/level1.html",
       // controller: "level1Controller"
     })
+    .state('dash.level1.lesson1', {
+      url: "/lesson1",
+      templateUrl: "partials/lesson1.html",
+      // controller: 'highchart'
+    })
+    .state('dash.level1.stock1', {
+      url: "/stock1",
+      templateUrl: "partials/stock1.html",
+      controller: "stock1Controller"
+    })
     .state('dash.level1.chart', {
       url: "/chart",
       templateUrl: "partials/chart.html",
       controller: 'highchart'
-    })
-    .state('dash.level1.lesson1', {
-      url: "/chart",
-      templateUrl: "partials/lesson1.html",
-      // controller: 'highchart'
     })
     .state('dash.level2', {
       url: "/level2",
@@ -33,17 +38,41 @@ app.config(function($stateProvider, $urlRouterProvider) {
       // controller: "level2Controller"
 
     })
-    .state('dash.level3', {
-      url: "/level3",
-      templateUrl: "partials/level3.html",
-      // controller: "level3Controller"
+    .state('dash.level2.lesson2', {
+      url: "/lesson2",
+      templateUrl: "partials/lesson2.html",
+      // controller: "level2Controller"
 
     })
-    .state('dash.level4', {
-      url: "/level4",
-      templateUrl: "partials/level4.html",
-      // controller: "level4Controller"
+    .state('dash.level2.chart2', {
+      url: "/chart2",
+      templateUrl: "partials/chart2.html",
+      controller: "highchart2"
+
     })
+    .state('dash.level2.stock2', {
+      url: "/stock2",
+      templateUrl: "partials/stock2.html",
+      // controller: "level2Controller"
+
+    })
+    // .state('dash.level3', {
+    //   url: "/level3",
+    //   templateUrl: "partials/level3.html",
+    //   // controller: "level3Controller"
+    //
+    // })
+    // .state('dash.level3.lesson3', {
+    //   url: "/lesson3",
+    //   templateUrl: "partials/level3.html",
+    //   // controller: "level3Controller"
+    //
+    // })
+    // .state('dash.level3', {
+    //   url: "/level3",
+    //   templateUrl: "partials/level3.html",
+    //   // controller: "level3Controller"
+    // })
     .state('splash', {
         url: "/splash",
         templateUrl: "partials/splash.html",
@@ -77,7 +106,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('dash.calculator', {
         url: "/calculator",
         templateUrl: "partials/calculator.html",
-        // controller: "DemoCtrl"
+        controller: "calculatorController"
     })
     .state('dash.intro', {
         url: "/intro",
@@ -97,12 +126,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('dash.portal.login', {
         url: "/login",
         templateUrl: "partials/login.html",
-        // controller: "DemoCtrl"
+        controller: "loginController"
     })
     .state('dash.portal.register', {
         url: "/register",
         templateUrl: "partials/signup.html",
-        // controller: "DemoCtrl"
+        controller: "newAccount"
     })
 
 
