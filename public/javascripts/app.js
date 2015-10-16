@@ -1,4 +1,4 @@
-var app = angular.module("grockr", ['ui.router','angularModalService','ngMaterial','ngStorage'])
+var app = angular.module("grockr", ['ui.router','angularModalService','ngMaterial','ngStorage','ngCookies'])
 app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
@@ -9,6 +9,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('dash', {
       url: "/dash",
       templateUrl: "partials/dash.html",
+      controller: 'dashController',
     })
     .state('dash.level1', {
       url: "/level1",
@@ -81,6 +82,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('dash.portal', {
         url: "/portal",
         templateUrl: "partials/portal.html",
+        controller: "logOutController"
     })
     .state('dash.library', {
         url: "/library",
@@ -95,6 +97,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: "/register",
         templateUrl: "partials/signup.html",
         controller: "newAccount"
+    })
+    .state('dash.portal.logout', {
+        url: "/logout",
+        templateUrl: "partials/logout.html",
     })
 
 

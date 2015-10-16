@@ -3,15 +3,7 @@ app.controller('stockController', ['$scope','$http','$localStorage',
     $scope.msft = $localStorage.msft;
     $scope.aapl = $localStorage.aapl;
     $scope.goog = $localStorage.aapl;
-  //
-  // $scope.getYahoo = function(){
-  //   $http.get('http://localhost:8080/yahoo').then(function (data) {
-  //     console.log(data)
-  //     $scope.msft = data.data[0];
-  //     $scope.aapl = data.data[1];
-  //     $scope.goog = data.data[2];
-  //   })
-  // }
+
 }]);
 
 app.controller('stock2Controller', ['$scope','$localStorage',
@@ -119,16 +111,48 @@ app.controller('newAccount', ["$scope", "$http","$location",
   }
 ])
 
-app.controller('loginController', ["$scope", "$http",'$location',
-  function($scope, $http, $location){
+app.controller('logOutController', ["$scope",'$localStorage','$location','$cookies',
+  function($scope, $localStorage, $location, $cookies){
+    $scope.logout = function(){
+      $cookies.remove('id');
+      $cookies.remove('user');
+      $location.path('/dash');
+    }
+
+  }
+])
+
+app.controller('loginController', ["$scope", "$http",'$location','$localStorage','$cookies',
+  function($scope, $http, $location, $localStorage, $cookies){
     $scope.login= function (credentials) {
       $http.post('http://localhost:8080/account/login', credentials).then(function (data) {
-        console.log(data)
+        $cookies.put('id', data.data[0].id)
+        $cookies.put('user', data.data[0].userName)
         $location.path('/dash')
       })
     }
   }
+])
 
+
+
+app.controller('dashController', ["$scope","$localStorage","$cookies",
+  function ($scope, $localStorage, $cookies) {
+    function login(){
+      var brand = 'grockr';
+      var nameSpace = $cookies.get('user');
+      if(nameSpace){
+        $scope.nameSpace = nameSpace
+      }
+      else{
+        $scope.nameSpace = brand;
+      }
+    }
+    $scope.$watch('nameSpace', login)
+    // $scope.$watch('brand', login)
+    // $scope.$watch('$scope.nameSpace', login)
+
+  }
 ])
 
 
@@ -236,6 +260,24 @@ app.controller("highchart2", function ($scope) {
 })
 
 
+
+
+// app.controller('dashController', ["$scope","$localStorage",
+//   function ($scope, $localStorage) {
+//     function login(){
+//       var nameSpace;
+//       if($localStorage.user === '' || undefined || null){
+//         nameSpace = 'grockr';
+//       }
+//       else{
+//         nameSpace = $localStorage.user;
+//       }
+//       $scope.nameSpace = nameSpace;
+//     }
+//     $scope.$watch('$localStorage', login)
+//
+//   }
+// ])
 
 // app.controller('stock1Controller', ["$scope","$http",
 //   function($scope, $http){
