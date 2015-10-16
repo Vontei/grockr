@@ -278,6 +278,9 @@ body {
   width: 30%;
   text-align: center; }
 
+#portalRow {
+  margin-top: 5%; }
+
 /*# sourceMappingURL=style.css.map */
 .btn3d {
   position: relative;

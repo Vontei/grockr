@@ -1,14 +1,58 @@
-app.controller('stockController', ['$scope','$http',
+app.controller('stockController', ['$scope','$http','$localStorage',
+  function($scope, $http, $localStorage){
+    $scope.msft = $localStorage.msft;
+    $scope.aapl = $localStorage.aapl;
+    $scope.goog = $localStorage.aapl;
+  //
+  // $scope.getYahoo = function(){
+  //   $http.get('http://localhost:8080/yahoo').then(function (data) {
+  //     console.log(data)
+  //     $scope.msft = data.data[0];
+  //     $scope.aapl = data.data[1];
+  //     $scope.goog = data.data[2];
+  //   })
+  // }
+}]);
+
+app.controller('stock2Controller', ['$scope','$localStorage',
+  function($scope, $localStorage){
+    $scope.goog = $localStorage.goog;
+}]);
+
+
+app.controller('sentimentController', ['$scope','$http',
   function($scope, $http){
-  $scope.getYahoo = function(){
-    $http.get('http://localhost:8080/yahoo').then(function (data) {
-      console.log(data)
-      $scope.msft = data.data[0];
-      $scope.aapl = data.data[1];
-      $scope.goog = data.data[2];
+    $http.get('http://localhost:8080/alchemy').then(function (data) {
+      var positive = 0;
+      var negative = 0;
+      $scope.face;
+      var sentiments = data.data.body.object.result.docs.map(function (doc) {
+        return doc.source.enriched.url.docSentiment.type;
+      })
+      sentiments.forEach(function (x) {
+        x === 'positive'? positive++ : negative++;
+      })
+      positive>negative ? $scope.face='fa fa-smile-o fa-3x' : $scope.face='fa fa-frown-o fa-3x';
+      console.log($scope.face)
     })
   }
-}]);
+]);
+
+
+app.controller('storageController', ['$scope','$http','$localStorage',
+  function($scope, $http, $localStorage){
+      $http.get('http://localhost:8080/yahoo').then(function (data) {
+          console.log(data)
+          $localStorage.msft = data.data[0];
+          $localStorage.aapl = data.data[1];
+          $localStorage.goog = data.data[2];
+      }).then(function () {
+        console.log($localStorage.aapl);
+      })
+  }
+])
+
+
 
 
 app.controller('cookieController', [
@@ -19,11 +63,12 @@ app.controller('cookieController', [
   }
 ])
 
-
+//
 // app.controller('stockController', ['$scope','apiService',
-//   function($scope){
-//     var stocks = apiService.getYahoo()
-//     console.log(stocks);
+//   function($scope, apiService){
+//     apiService.getYahoo().then(function (data) {
+//       console.log(data)
+//     })
 //   }
 // ])
 
@@ -117,33 +162,6 @@ app.controller('whatIfController', ["$scope",
 
 
 
-//
-// app.controller('DemoCtrl', function($scope) {
-//     $scope.user = {
-//       userName: 'John Doe',
-//       password: 'fun@email.com',
-//       passwordConf: '999-999-9999',
-//     };
-// });
-//
-
-
-
-//
-// (function() {
-//   app.controller('DemoCtrl2', function() {
-//       this.topDirections = ['left', 'up'];
-//       this.bottomDirections = ['down', 'right'];
-//       this.isOpen = false;
-//       this.availableModes = ['md-fling', 'md-scale'];
-//       this.selectedMode = 'md-fling';
-//       this.availableDirections = ['up', 'down', 'left', 'right'];
-//       this.selectedDirection = 'down';
-//     });
-// })();
-
-
-
 app.controller("highchart", function ($scope) {
   $scope.chart = $(function () {
       $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function (data) {
@@ -219,14 +237,14 @@ app.controller("highchart2", function ($scope) {
 
 
 
-app.controller('stock1Controller', ["$scope","$http",
-  function($scope, $http){
-    var stockPrice;
-    var price = $http.get('http://localhost:8080/account/2/2').then(function (data) {
-      console.log(data)
-      stockPrice = data.data[0];
-    }).then(function () {
-      $scope.stockPrice = "$ " + stockPrice;
-    })
-  }
-])
+// app.controller('stock1Controller', ["$scope","$http",
+//   function($scope, $http){
+//     var stockPrice;
+//     var price = $http.get('http://localhost:8080/account/2/2').then(function (data) {
+//       console.log(data)
+//       stockPrice = data.data[0];
+//     }).then(function () {
+//       $scope.stockPrice = "$ " + stockPrice;
+//     })
+//   }
+// ])
