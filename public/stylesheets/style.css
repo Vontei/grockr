@@ -185,7 +185,7 @@ body {
   margin: 0 auto;
   margin-top: 15%; }
 
-#CHARTcontainer {
+#CHARTcontainer, #CHART2container, #CHART3container {
   box-shadow: 3px 9px 24px -3px rgba(0, 0, 0, 0.75);
   width: 100%;
   margin: 0 auto;
@@ -360,6 +360,10 @@ body {
 .btn3d.btn-danger:active, .btn3d.btn-danger.active {
   box-shadow: 0 0 0 1px #b93802 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
   background-color: #D73814; }
+
+#orderButton {
+  box-shadow: 0 0 0 1px #30cd00 inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+  background-color: #78d739; }
 
 #landingButton {
   border-radius: 100%; }

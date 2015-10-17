@@ -12,12 +12,12 @@
   </thead>
   <tbody>
     <tr ng-repeat="order in orders">
-      <td>order.stock</td>
-      <td>order.qty</td>
-      <td>order.buyPrice</td>
-      <td>{{currentPrice}}</td>
-      <td>{{profitLoss}}</td>
-      <td><button type="button" class="btn btn-danger btn-lg btn3d"><span class="fa fa-chevron-down"></span> SELL</button></td>
+      <td>{{order.stock}}</td>
+      <td>{{order.qty}}</td>
+      <td>{{order.buyPrice | currency}}</td>
+      <td>{{order.currentPrice | currency}}</td>
+      <td>{{order.profitLoss}}</td>
+      <td style='text-align:center;'><button type="button" class="btn btn-danger btn-lg btn3d"><span class="fa fa-chevron-down"></span> SELL</button></td>
     </tr>
   </tbody>
 </table>

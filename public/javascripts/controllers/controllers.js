@@ -1,10 +1,37 @@
-app.controller('stockController', ['$scope','$http','$localStorage',
-  function($scope, $http, $localStorage){
+app.controller('stockController', ['$scope','$http','$localStorage','$cookies','$location',
+  function($scope, $http, $localStorage, $cookies, $location){
     $scope.msft = $localStorage.msft;
     $scope.aapl = $localStorage.aapl;
     $scope.goog = $localStorage.aapl;
 
-}]);
+    $scope.aaplOrder = function(){
+      console.log($scope.qty);
+      var order = {
+        id: $cookies.get('id'),
+        stock: 'AAPL',
+        price: $scope.aapl,
+        qty: $scope.qty
+      }
+      post(order);
+    }
+    $scope.msftOrder = function(){
+      var order = {
+        id: $cookies.get('id'),
+        stock: 'MSFT',
+        price: $scope.msft,
+        qty: $scope.MSFTqty
+      }
+      post(order);
+    }
+    var post = function(order) {
+       $http.post('http://localhost:8080/buy', order).then(function (data) {
+        console.log("posted order");
+        $location.path('/dash')
+      })
+    }
+
+  }
+]);
 
 app.controller('stock2Controller', ['$scope','$localStorage',
   function($scope, $localStorage){
@@ -12,22 +39,52 @@ app.controller('stock2Controller', ['$scope','$localStorage',
 }]);
 
 
-app.controller('sentimentController', ['$scope','$http',
-  function($scope, $http){
-    $http.get('http://localhost:8080/alchemy').then(function (data) {
-      var positive = 0;
-      var negative = 0;
-      $scope.face;
-      var sentiments = data.data.body.object.result.docs.map(function (doc) {
-        return doc.source.enriched.url.docSentiment.type;
+
+app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage",
+  function ($scope, $http, $cookies, $localStorage) {
+    $http.get('http://localhost:8080/orders/'+ $cookies.get('id')).then(function (data) {
+      var list = data.data;
+      var orders = list.map(function (e) {
+        var priceNow;
+        if(e.stock ==='AAPL') priceNow = $localStorage.aapl;
+        if(e.stock ==='MSFT') priceNow = $localStorage.msft;
+        if(e.stock ==='GOOG') priceNow = $localStorage.goog;
+        var buy = parseInt(e.buyPrice);
+        var nowPrice = parseInt(priceNow);
+        var qty = parseInt(e.qty);
+        var pl;
+        buy > nowPrice ? pl = "- " + ((buy-nowPrice)*qty) : pl= "+ " + ((nowPrice-buy)*qty);
+        return {
+          stock: e.stock,
+          qty: qty,
+          buyPrice: buy,
+          currentPrice: nowPrice,
+          profitLoss: pl
+        }
       })
-      sentiments.forEach(function (x) {
-        x === 'positive'? positive++ : negative++;
-      })
-      positive>negative ? $scope.face='fa fa-smile-o fa-3x' : $scope.face='fa fa-frown-o fa-3x';
-      console.log($scope.face)
+      $scope.orders = orders;
     })
   }
+])
+
+
+
+app.controller('sentimentController', ['$scope','$http',
+  // function($scope, $http){
+  //   $http.get('http://localhost:8080/alchemy').then(function (data) {
+  //     var positive = 0;
+  //     var negative = 0;
+  //     $scope.face;
+  //     var sentiments = data.data.body.object.result.docs.map(function (doc) {
+  //       return doc.source.enriched.url.docSentiment.type;
+  //     })
+  //     sentiments.forEach(function (x) {
+  //       x === 'positive'? positive++ : negative++;
+  //     })
+  //     positive>negative ? $scope.face='fa fa-smile-o fa-3x' : $scope.face='fa fa-frown-o fa-3x';
+  //     console.log($scope.face)
+  //   })
+  // }
 ]);
 
 
@@ -118,7 +175,6 @@ app.controller('logOutController', ["$scope",'$localStorage','$location','$cooki
       $cookies.remove('user');
       $location.path('/dash');
     }
-
   }
 ])
 
@@ -136,29 +192,36 @@ app.controller('loginController', ["$scope", "$http",'$location','$localStorage'
 
 
 
-app.controller('dashController', ["$scope","$localStorage","$cookies",
-  function ($scope, $localStorage, $cookies) {
+app.controller('dashController', ["$scope","$localStorage","$cookies","$rootScope",
+  function ($scope, $localStorage, $cookies, $rootScope) {
     function login(){
       var brand = 'grockr';
-      var nameSpace = $cookies.get('user');
-      if(nameSpace){
-        $scope.nameSpace = nameSpace
+      if($cookies.get('user') != null){
+        $rootScope.nameSpace = $cookies.get('user')
       }
       else{
-        $scope.nameSpace = brand;
+        $rootScope.nameSpace = brand;
       }
     }
     $scope.$watch('nameSpace', login)
-    // $scope.$watch('brand', login)
-    // $scope.$watch('$scope.nameSpace', login)
+  }
+])
 
+
+app.controller('newOrder', ["$scope", "$http","$location",
+  function($scope, $http, $location){
+    $scope.createOrder = function(credentials){
+      $http.post('http://localhost:8080/buy', credentials).then(function (data) {
+        console.log("posted order");
+        $location.path('/dash')
+      })
+    }
   }
 ])
 
 
 app.controller('whatIfController', ["$scope",
   function($scope){
-
     var calculate = function(){
     var price = parseFloat($scope.price);
     var wallet = parseFloat($scope.wallet);
@@ -176,11 +239,7 @@ app.controller('whatIfController', ["$scope",
     $scope.$watch('wallet', calculate)
     $scope.$watch('profit', calculate)
     $scope.$watch('fee', calculate)
-
-
-
   }
-
 ])
 
 
@@ -198,6 +257,39 @@ app.controller("highchart", function ($scope) {
               },
               series : [{
                   name : 'GOOG Stock Price',
+                  data : data,
+                  type : 'areaspline',
+                  threshold : null,
+                  tooltip : {
+                      valueDecimals : 2
+                  },
+                  fillColor : {
+                      linearGradient : {
+                          x1: 0,
+                          y1: 0,
+                          x2: 0,
+                          y2: 1
+                      },
+                      stops : [
+                          [0, Highcharts.getOptions().colors[0]],
+                          [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                      ]
+                  }
+              }]
+          });
+      });
+  });
+  $scope.chart3 = $(function () {
+      $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=msft-c.json&callback=?', function (data) {
+          $('#CHART3container').highcharts('StockChart', {
+              rangeSelector : {
+                  selected : 1
+              },
+              title : {
+                  text : 'MICROSOFT Stock Price'
+              },
+              series : [{
+                  name : 'MSFT Stock Price',
                   data : data,
                   type : 'areaspline',
                   threshold : null,
@@ -258,35 +350,3 @@ app.controller("highchart2", function ($scope) {
       });
   });
 })
-
-
-
-
-// app.controller('dashController', ["$scope","$localStorage",
-//   function ($scope, $localStorage) {
-//     function login(){
-//       var nameSpace;
-//       if($localStorage.user === '' || undefined || null){
-//         nameSpace = 'grockr';
-//       }
-//       else{
-//         nameSpace = $localStorage.user;
-//       }
-//       $scope.nameSpace = nameSpace;
-//     }
-//     $scope.$watch('$localStorage', login)
-//
-//   }
-// ])
-
-// app.controller('stock1Controller', ["$scope","$http",
-//   function($scope, $http){
-//     var stockPrice;
-//     var price = $http.get('http://localhost:8080/account/2/2').then(function (data) {
-//       console.log(data)
-//       stockPrice = data.data[0];
-//     }).then(function () {
-//       $scope.stockPrice = "$ " + stockPrice;
-//     })
-//   }
-// ])

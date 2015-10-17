@@ -14,7 +14,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('dash.level1', {
       url: "/level1",
       templateUrl: "partials/level1.html",
-      controller: "stockController"
+      // controller: "stockController"
     })
     .state('dash.level1.lesson1', {
       url: "/lesson1",
@@ -23,6 +23,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('dash.level1.stock1', {
       url: "/stock1",
       templateUrl: "partials/stock1.html",
+      controller: "stockController"
+
+
     })
     .state('dash.level1.chart', {
       url: "/chart",
@@ -65,6 +68,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('dash.orders', {
         url: "/orders",
         templateUrl: "partials/orders.html",
+        controller: 'ordersController'
     })
     .state('dash.members', {
         url: "/members",
