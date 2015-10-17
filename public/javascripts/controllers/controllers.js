@@ -44,6 +44,7 @@ app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage
   function ($scope, $http, $cookies, $localStorage) {
     $http.get('http://localhost:8080/orders/'+ $cookies.get('id')).then(function (data) {
       var list = data.data;
+      console.log(data.data);
       var orders = list.map(function (e) {
         var priceNow;
         if(e.stock ==='AAPL') priceNow = $localStorage.aapl;
@@ -55,15 +56,73 @@ app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage
         var pl;
         buy > nowPrice ? pl = "- " + ((buy-nowPrice)*qty) : pl= "+ " + ((nowPrice-buy)*qty);
         return {
+          id: e.id,
           stock: e.stock,
           qty: qty,
-          buyPrice: buy,
-          currentPrice: nowPrice,
+          buyPrice: e.buyPrice,
+          currentPrice: priceNow,
           profitLoss: pl
         }
       })
       $scope.orders = orders;
     })
+
+    $scope.sellOrder = function(){
+      if(this.order.stock ==='AAPL') priceNow = $localStorage.aapl;
+      if(this.order.stock ==='MSFT') priceNow = $localStorage.msft;
+      if(this.order.stock ==='GOOG') priceNow = $localStorage.goog;
+      currentPrice = parseFloat(priceNow);
+      buy = parseFloat(this.order.buyPrice);
+      qty = parseInt(this.order.qty)
+      var profit;
+      var newBalance;
+      if(currentPrice > buy) {
+        newBalance=(currentPrice-buy)*qty;
+        profit=true;
+      }
+      if(currentPrice < buy){
+        newBalance=(buy-currentPrice)*qty
+        profit=false;
+      }
+      if(currentPrice === buy){
+        newBalance = 0;
+        profit=false;
+      }
+      var order = {
+        profit: profit,
+        orderid: this.order.id,
+        accountid: $cookies.get('id'),
+        balance: newBalance
+      }
+      console.log(order)
+      $http.post('http://localhost:8080/sell', order).then(function (data) {
+        var list = data.data;
+        console.log(data.data);
+        var orders = list.map(function (e) {
+          var priceNow;
+          if(e.stock ==='AAPL') priceNow = $localStorage.aapl;
+          if(e.stock ==='MSFT') priceNow = $localStorage.msft;
+          if(e.stock ==='GOOG') priceNow = $localStorage.goog;
+          var buy = parseInt(e.buyPrice);
+          var nowPrice = parseInt(priceNow);
+          var qty = parseInt(e.qty);
+          var pl;
+          buy > nowPrice ? pl = "- " + ((buy-nowPrice)*qty) : pl= "+ " + ((nowPrice-buy)*qty);
+          return {
+            id: e.id,
+            stock: e.stock,
+            qty: qty,
+            buyPrice: e.buyPrice,
+            currentPrice: priceNow,
+            profitLoss: pl
+          }
+        })
+        $scope.orders = orders;
+        $location.path('/orders')
+      })
+    }
+
+
   }
 ])
 
@@ -102,25 +161,12 @@ app.controller('storageController', ['$scope','$http','$localStorage',
 ])
 
 
-
-
 app.controller('cookieController', [
   function($scope, $cookies){
     var favoriteCookie = $cookies.get('myFavorite');
- // Setting a cookie
     $cookies.put('myFavorite', 'oatmeal');
   }
 ])
-
-//
-// app.controller('stockController', ['$scope','apiService',
-//   function($scope, apiService){
-//     apiService.getYahoo().then(function (data) {
-//       console.log(data)
-//     })
-//   }
-// ])
-
 
 app.controller('xhrController', ['$scope','$http',
   function($scope, $http){
@@ -218,6 +264,8 @@ app.controller('newOrder', ["$scope", "$http","$location",
     }
   }
 ])
+
+
 
 
 app.controller('whatIfController', ["$scope",

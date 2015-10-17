@@ -25,7 +25,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "partials/stock1.html",
       controller: "stockController"
 
-
     })
     .state('dash.level1.chart', {
       url: "/chart",
