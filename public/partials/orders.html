@@ -1,11 +1,12 @@
 <div class='container'>
-<h1>Orders</h1>
+<h1 style='font-family: Nunito;'>Orders</h1>
 <div class='box' id='balanceBox'>
-
-  Balance: <span>{{ | currency}}</span>
+  <span class='pull-left'>Account Balance </span>
+  <span class='pull-right'>{{balance | currency}}</span>
+  <br>
 </div>
 
-<table id='ordersTable' class="table ">
+<table id='ordersTable' class="table">
   <thead>
     <th>Stock</th>
     <th>Quantity</th>

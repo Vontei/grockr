@@ -5,7 +5,6 @@ app.controller('stockController', ['$scope','$http','$localStorage','$cookies','
     $scope.goog = $localStorage.aapl;
 
     $scope.aaplOrder = function(){
-      console.log($scope.qty);
       var order = {
         id: $cookies.get('id'),
         stock: 'AAPL',
@@ -25,26 +24,38 @@ app.controller('stockController', ['$scope','$http','$localStorage','$cookies','
     }
     var post = function(order) {
        $http.post('http://localhost:8080/buy', order).then(function (data) {
-        console.log("posted order");
-        $location.path('/dash')
+        $location.path('/dash/orders')
       })
     }
 
   }
 ]);
 
-app.controller('stock2Controller', ['$scope','$localStorage',
-  function($scope, $localStorage){
+app.controller('stock2Controller', ['$scope','$localStorage','$cookies',"$http","$location",
+  function($scope, $localStorage,$cookies, $http, $location){
     $scope.goog = $localStorage.goog;
+    $scope.googOrder = function(){
+      var order = {
+        id: $cookies.get('id'),
+        stock: 'GOOG',
+        price: $scope.goog,
+        qty: $scope.qty
+      }
+      post(order);
+    }
+    var post = function(order) {
+       $http.post('http://localhost:8080/buy', order).then(function (data) {
+        $location.path('/dash/orders')
+      })
+    }
 }]);
 
 
 
-app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage",
-  function ($scope, $http, $cookies, $localStorage) {
+app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage","$location",
+  function ($scope, $http, $cookies, $localStorage, $location) {
     $http.get('http://localhost:8080/orders/'+ $cookies.get('id')).then(function (data) {
       var list = data.data;
-      console.log(data.data);
       var orders = list.map(function (e) {
         var priceNow;
         if(e.stock ==='AAPL') priceNow = $localStorage.aapl;
@@ -65,6 +76,10 @@ app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage
         }
       })
       $scope.orders = orders;
+    }).then(function () {
+      $http.get('http://localhost:8080/balance/'+ $cookies.get('id')).then(function (data) {
+        $scope.balance = data.data;
+      })
     })
 
     $scope.sellOrder = function(){
@@ -74,30 +89,14 @@ app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage
       currentPrice = parseFloat(priceNow);
       buy = parseFloat(this.order.buyPrice);
       qty = parseInt(this.order.qty)
-      var profit;
-      var newBalance;
-      if(currentPrice > buy) {
-        newBalance=(currentPrice-buy)*qty;
-        profit=true;
-      }
-      if(currentPrice < buy){
-        newBalance=(buy-currentPrice)*qty
-        profit=false;
-      }
-      if(currentPrice === buy){
-        newBalance = 0;
-        profit=false;
-      }
+      orderTotal = currentPrice*qty;
       var order = {
-        profit: profit,
         orderid: this.order.id,
         accountid: $cookies.get('id'),
-        balance: newBalance
+        balance: orderTotal
       }
-      console.log(order)
       $http.post('http://localhost:8080/sell', order).then(function (data) {
         var list = data.data;
-        console.log(data.data);
         var orders = list.map(function (e) {
           var priceNow;
           if(e.stock ==='AAPL') priceNow = $localStorage.aapl;
@@ -118,11 +117,13 @@ app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage
           }
         })
         $scope.orders = orders;
-        $location.path('/orders')
+      }).then(function () {
+        $http.get('http://localhost:8080/balance/'+ $cookies.get('id')).then(function (data) {
+          $scope.balance = data.data;
+          $location.path('/orders')
       })
-    }
-
-
+    })
+  }
   }
 ])
 
@@ -150,13 +151,14 @@ app.controller('sentimentController', ['$scope','$http',
 app.controller('storageController', ['$scope','$http','$localStorage',
   function($scope, $http, $localStorage){
       $http.get('http://localhost:8080/yahoo').then(function (data) {
-          console.log(data)
           $localStorage.msft = data.data[0];
           $localStorage.aapl = data.data[1];
           $localStorage.goog = data.data[2];
-      }).then(function () {
-        console.log($localStorage.aapl);
       })
+      console.log("Hi there, welcome to grockr!")
+      console.log("You must be curious... ")
+      console.log("grockr is built with Angular and Spring. Hack away!")
+      console.log("Thanks for taking a looksy and have fun learning about the markets!")
   }
 ])
 
@@ -168,46 +170,42 @@ app.controller('cookieController', [
   }
 ])
 
-app.controller('xhrController', ['$scope','$http',
-  function($scope, $http){
-    $scope.java= function(){
-      console.log('JAVA CALL');
-      $http.get('http://localhost:8080/greeting?name='+$scope.name).then(function (data) {
-        $scope.javaResponse = data.data.content;
-      })
-      $http.get("http://localhost:8080/account/people").then(function(results){
-        var people = results.data
-        people.forEach(function (x) {
-          var y = x.split(',');
-          var z = y[1].split(',');
-          var w = z[0].split('=');
-          console.log(w[1]);
-        })
-      })
-      $http.get('http://localhost:8080/account/'+$scope.num1 +'/'+ $scope.num2).then(function (data) {
-        console.log(data)
-        $scope.stockPrice = data.data[0];
-        $scope.resultNum = data.data[1];
-      })
-  }
-  $scope.submitForm = function(){
-    var data = {
-     name: $scope.trial
-    }
-    $http.post('http://localhost:8080/account/trial', data).then(function (data) {
-      console.log(data)
-      console.log(JSON.parse(data.data[0]));
-    })
-  }
-}
-])
+// app.controller('xhrController', ['$scope','$http',
+//   function($scope, $http){
+//     $scope.java= function(){
+//       $http.get('http://localhost:8080/greeting?name='+$scope.name).then(function (data) {
+//         $scope.javaResponse = data.data.content;
+//       })
+//       $http.get("http://localhost:8080/account/people").then(function(results){
+//         var people = results.data
+//         people.forEach(function (x) {
+//           var y = x.split(',');
+//           var z = y[1].split(',');
+//           var w = z[0].split('=');
+//         })
+//       })
+//       $http.get('http://localhost:8080/account/'+$scope.num1 +'/'+ $scope.num2).then(function (data) {
+//         $scope.stockPrice = data.data[0];
+//         $scope.resultNum = data.data[1];
+//       })
+//   }
+//   $scope.submitForm = function(){
+//     var data = {
+//      name: $scope.trial
+//     }
+//     $http.post('http://localhost:8080/account/trial', data).then(function (data) {
+//       console.log(data)
+//       console.log(JSON.parse(data.data[0]));
+//     })
+//   }
+// }
+// ])
 
 
 app.controller('newAccount', ["$scope", "$http","$location",
   function($scope, $http, $location){
     $scope.createAccount = function(credentials){
       $http.post('http://localhost:8080/account/new', credentials).then(function (data) {
-        console.log(data.data[0]);
         $location.path('/dash')
       })
     }
@@ -258,7 +256,6 @@ app.controller('newOrder', ["$scope", "$http","$location",
   function($scope, $http, $location){
     $scope.createOrder = function(credentials){
       $http.post('http://localhost:8080/buy', credentials).then(function (data) {
-        console.log("posted order");
         $location.path('/dash')
       })
     }
@@ -281,7 +278,7 @@ app.controller('whatIfController', ["$scope",
     $scope.spend = (afford*price) || 0;
     $scope.breakeven = breakeven || 0;
     $scope.goal = breakeven+profit || 0;
-    $scope.sell = ((breakeven+profit)/2) || 0;
+    $scope.sell = ((breakeven+profit)/afford) || 0;
   }
     $scope.$watch('price', calculate)
     $scope.$watch('wallet', calculate)

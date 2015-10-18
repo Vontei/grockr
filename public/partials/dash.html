@@ -1,32 +1,32 @@
 <div class="nav-side-menu">
-  <div class="brand"><h4 id='dashBrand' ui-sref='home'>{{nameSpace}}</h4></div>
-  <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+  <div class="brand"><h3 id='dashBrand' ui-sref='home'>{{nameSpace}}</h3></div>
+  <i class="glyphicon glyphicon-menu-hamburger toggle-btn-inverse" data-toggle="collapse" data-target="#menu-content"></i>
   <div class="menu-list">
     <ul id="menu-content" class="menu-content collapse out">
       <li>
         <a ui-sref=".intro">
-          <i class="fa fa-line-chart"></i>Intro
+          <i class="fa fa-line-chart"></i> About
         </a>
       </li>
       <li data-toggle="collapse" data-target="#service" class="collapsed">
-        <a href="#"><i class="fa fa-graduation-cap"></i>Lessons<span class="arrow"></span></a>
+        <a href="#"><i class="fa fa-graduation-cap"></i> Lessons<span class="arrow"></span></a>
       </li>
       <ul class="sub-menu collapse" id="service">
-        <li ui-sref='.level1'>Level 1</li>
-        <li ui-sref='.level2'>Level 2</li>
+        <li ui-sref='.level1'> Level 1</li>
+        <li ui-sref='.level2'> Level 2</li>
       </ul>
 
       <li ui-sref='.calculator'>
-         <a href="#"><i class="fa fa-calculator"></i>Calculator</a>
+         <a href="#"><i class="fa fa-calculator"></i> Calculator</a>
       </li>
 
       <li ui-sref='.library'>
-         <a href="#"><i class="fa fa-folder-o"></i>Library</a>
+         <a href="#"><i class="fa fa-folder-o"></i> Library</a>
       </li>
 
 
       <li ui-sref='.orders'>
-        <a href="#"><i class="fa fa-rocket"></i>Orders</a>
+        <a href="#"><i class="fa fa-rocket"></i> Orders</a>
       </li>
 
        <li ui-sref='.portal'>
