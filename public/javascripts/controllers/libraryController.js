@@ -49,7 +49,7 @@ app.controller('LibraryDefinitions', ['$scope',
       },
       {
         word: "P/L",
-        definition: "A summary of how much money either you or a company has either made or lost.",
+        definition: "A summary of how much money either you or a company has either made or lost. It stands for Total Profit or Loss.",
         seeAlso: "profit"
       },
       {
@@ -131,6 +131,11 @@ app.controller('LibraryDefinitions', ['$scope',
         word: "Securities",
         definition: "The term securities is a more generic name for an ownership of a stock, bond, or option. Securities things that are bought and sold for profit. They can be stocks, but there are several other types of securities that are traded by large companies.",
         seeAlso: "stock"
+      },
+      {
+        word: "Balance",
+        definition: "Your account balance is how much money you currectly have. Remember, if you have orders that have not been closed or sold yet, the amount of money you actually have available is your balance minus the sume of your order totals.",
+        seeAlso: "stock, liquid"
       },
 
 

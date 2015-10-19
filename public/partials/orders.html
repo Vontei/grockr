@@ -1,9 +1,14 @@
 <div class='container'>
 <h1 style='font-family: Nunito;'>Orders</h1>
 <div class='box' id='balanceBox'>
-  <span class='pull-left'>Account Balance </span>
-  <span class='pull-right'>{{balance | currency}}</span>
-  <br>
+  <div class='row'>
+    <span class='pull-left'>Account Balance </span>
+    <span class='pull-right'>{{balance | currency}}</span>
+  </div>
+  <div class='row'>
+    <span class='pull-left'>Total P/L</span>
+    <span class='pull-right'>{{accountDiff}}</span>
+  </div>
 </div>
 
 <table id='ordersTable' class="table">

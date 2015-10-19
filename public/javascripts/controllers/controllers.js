@@ -56,6 +56,9 @@ app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage
   function ($scope, $http, $cookies, $localStorage, $location) {
     $http.get('http://localhost:8080/orders/'+ $cookies.get('id')).then(function (data) {
       var list = data.data;
+      var buyTotal = 0;
+      var currentTotal = 0
+      var accountDiff;
       var orders = list.map(function (e) {
         var priceNow;
         if(e.stock ==='AAPL') priceNow = $localStorage.aapl;
@@ -65,7 +68,10 @@ app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage
         var nowPrice = parseFloat(priceNow);
         var qty = parseInt(e.qty);
         var pl;
-        buy > nowPrice ? pl = "- " + ((buy-nowPrice)*qty).toFixed(2) : pl= "+ " + ((nowPrice-buy)*qty).toFixed(2);
+        buyTotal+=(buy*qty);
+        currentTotal+=(nowPrice*qty);
+        buyTotal>currentTotal ? accountDiff= '- $'+ (buyTotal-currentTotal).toFixed(2): accountDiff = "+ $"+(currentTotal-buyTotal).toFixed(2);
+        buy > nowPrice ? pl = "- $" + ((buy-nowPrice)*qty).toFixed(2) : pl= "+ $" + ((nowPrice-buy)*qty).toFixed(2);
         return {
           id: e.id,
           stock: e.stock,
@@ -75,6 +81,7 @@ app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage
           profitLoss: pl
         }
       })
+      $scope.accountDiff = accountDiff;
       $scope.orders = orders;
     }).then(function () {
       $http.get('http://localhost:8080/balance/'+ $cookies.get('id')).then(function (data) {
