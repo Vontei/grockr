@@ -440,6 +440,9 @@ body {
     font-size: 1.2em;
   }
 
+  .lesson1{
+    text-align: left;
+  }
 
   .lesson1 p{
     font-size: 18px;
@@ -453,5 +456,9 @@ body {
     text-align: left;
     font-size: 1.2em;
     margin-top: 4%;
+  }
+
+  h1 {
+    font-family: Nunito;
   }
 /*# sourceMappingURL=style.css.map */

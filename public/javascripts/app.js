@@ -79,7 +79,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         controller: 'whatIfController',
     })
     .state('dash.intro', {
-        url: "dash/intro",
+        url: "/intro",
         templateUrl: "partials/intro.html",
     })
     .state('dash.portal', {
