@@ -109,11 +109,11 @@ app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage
           if(e.stock ==='AAPL') priceNow = $localStorage.aapl;
           if(e.stock ==='MSFT') priceNow = $localStorage.msft;
           if(e.stock ==='GOOG') priceNow = $localStorage.goog;
-          var buy = parseInt(e.buyPrice);
-          var nowPrice = parseInt(priceNow);
+          var buy = parseFloat(e.buyPrice);
+          var nowPrice = parseFloat(priceNow);
           var qty = parseInt(e.qty);
           var pl;
-          buy > nowPrice ? pl = "- " + ((buy-nowPrice)*qty) : pl= "+ " + ((nowPrice-buy)*qty);
+          buy > nowPrice ? pl = "- " + ((buy-nowPrice)*qty).toFixed(2) : pl= "+ " + ((nowPrice-buy)*qty).toFixed(2);
           return {
             id: e.id,
             stock: e.stock,
@@ -127,7 +127,7 @@ app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage
       }).then(function () {
         $http.get('http://localhost:8080/balance/'+ $cookies.get('id')).then(function (data) {
           $scope.balance = data.data;
-          $location.path('/orders')
+          // $location.path('/orders')
       })
     })
   }

@@ -135,6 +135,12 @@
   -ms-transition: all 1s ease;
   transition: all 1s ease; }
 
+  .innerDash {
+    width: 85%;
+    float: right; }
+
+
+
 @media (max-width: 767px) {
   .nav-side-menu {
     position: relative;
@@ -163,16 +169,19 @@
 
   .innerDash {
     width: 100%;
-    margin: 0; }
+    margin: 0;
+   }
   }
 @media (min-width: 767px) {
   .nav-side-menu .menu-list .menu-content {
-    display: block; }
+    display: block;
+   }
 
   .innerDash {
     width: 100%;
     margin: 0; }
 }
+
 body {
   margin: 0px;
   padding: 0px; }
@@ -465,11 +474,8 @@ body {
   .splash{
     margin: 0;
     padding: 0;
-    margin-top: 4em;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.16), 0 15px 10px 0 rgba(0, 0, 0, 0.12);
   }
 
-  body {
-    height: 100%;
-  }
+
 /*# sourceMappingURL=style.css.map */
