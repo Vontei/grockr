@@ -200,35 +200,48 @@ app.controller('cookieController', [
 //   }
 // }
 // ])
+app.controller('test', ["$scope", "$http","$location",
+  function($scope, $http, $location){
+      $http.get('http://grockr.herokuapp.com/API').then(function (data) {
+        console.log(data)
+      })
+    }
+
+])
+
+
 
 
 app.controller('newAccount', ["$scope", "$http","$location",
   function($scope, $http, $location){
     $scope.createAccount = function(credentials){
       $http.post('http://localhost:8080/account/new', credentials).then(function (data) {
-        $location.path('/dash')
+        $location.path('/dash/portal/login')
       })
     }
   }
 ])
 
-app.controller('logOutController', ["$scope",'$localStorage','$location','$cookies',
-  function($scope, $localStorage, $location, $cookies){
+app.controller('logOutController', ["$scope",'$localStorage','$location','$cookies',"$rootScope",
+  function($scope, $localStorage, $location, $cookies,$rootScope){
     $scope.logout = function(){
       $cookies.remove('id');
       $cookies.remove('user');
+      $rootScope.nameSpace = 'grockr';
       $location.path('/dash');
     }
   }
 ])
 
-app.controller('loginController', ["$scope", "$http",'$location','$localStorage','$cookies',
-  function($scope, $http, $location, $localStorage, $cookies){
+app.controller('loginController', ["$scope", "$http",'$location','$localStorage','$cookies','$rootScope',
+  function($scope, $http, $location, $localStorage, $cookies, $rootScope){
     $scope.login= function (credentials) {
       $http.post('http://localhost:8080/account/login', credentials).then(function (data) {
         $cookies.put('id', data.data[0].id)
         $cookies.put('user', data.data[0].userName)
-        $location.path('/dash')
+        $rootScope.nameSpace = data.data[0].userName;
+      }).then(function () {
+        $location.path('/dash/intro')
       })
     }
   }
@@ -238,16 +251,17 @@ app.controller('loginController', ["$scope", "$http",'$location','$localStorage'
 
 app.controller('dashController', ["$scope","$localStorage","$cookies","$rootScope",
   function ($scope, $localStorage, $cookies, $rootScope) {
-    function login(){
-      var brand = 'grockr';
-      if($cookies.get('user') != null){
-        $rootScope.nameSpace = $cookies.get('user')
-      }
-      else{
-        $rootScope.nameSpace = brand;
-      }
-    }
-    $scope.$watch('nameSpace', login)
+    $rootScope.nameSpace='grockr';
+  //   function login(){
+  //     var brand = 'grockr';
+  //   //   if($cookies.get('user') != null){
+  //   //     $rootScope.nameSpace = $cookies.get('user')
+  //   //   }
+  //   //   else{
+  //   //     $rootScope.nameSpace = brand;
+  //   //   }
+  //   // }
+  //   // $scope.$watch('nameSpace', login)
   }
 ])
 

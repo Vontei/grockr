@@ -1,4 +1,4 @@
-<div class='container'>
+<div class='container library'>
 
 
   <div class='row'>
@@ -8,11 +8,18 @@
   </div>
   <div class="row">
     <div id='librarySearchBar' class="input-group">
-      <input type="text" class="form-control" style='text-align:center;' placeholder="Search for...">
-    </div><!-- /input-group -->
-  </div><!--
-
-  <div ui-view></div>
+      <input ng-model="query" role='search' type="text" class="form-control" style='text-align:center;' placeholder="Search for...">
+    </div>
+  </div>
 
 
+
+
+<div ng-repeat="term in definitions | orderBy: 'word.toString()' | filter:{word:query}">
+  <div class='box text-left'>
+    <h5>{{term.word}}</5>
+    <hr>
+    <blockquote>{{term.definition}}</blockquote>
+    <small>See also: {{term.seeAlso}}</small>
+  </div>
 </div>

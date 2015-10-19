@@ -440,4 +440,18 @@ body {
     font-size: 1.2em;
   }
 
+
+  .lesson1 p{
+    font-size: 18px;
+  }
+
+  .lesson1 li{
+    font-size: 18px;
+  }
+
+  .library .box{
+    text-align: left;
+    font-size: 1.2em;
+    margin-top: 4%;
+  }
 /*# sourceMappingURL=style.css.map */

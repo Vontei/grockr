@@ -18,7 +18,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('dash.level1.lesson1', {
       url: "/lesson1",
-      templateUrl: "partials/lesson1.html",
+      templateUrl: "partials/lesson1.html"
     })
     .state('dash.level1.stock1', {
       url: "/stock1",
@@ -79,7 +79,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         controller: 'whatIfController',
     })
     .state('dash.intro', {
-        url: "/intro",
+        url: "dash/intro",
         templateUrl: "partials/intro.html",
     })
     .state('dash.portal', {
@@ -90,6 +90,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('dash.library', {
         url: "/library",
         templateUrl: "partials/library.html",
+        controller: "LibraryDefinitions"
     })
     .state('dash.portal.login', {
         url: "/login",
@@ -108,7 +109,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
 
   // $urlRouterProvider.otherwise("home");
-    $locationProvider.html5Mode(true);
+    // $locationProvider.html5Mode(true);
 
 });
 
