@@ -235,7 +235,7 @@ app.controller('logOutController', ["$scope",'$localStorage','$location','$cooki
       $cookies.remove('id');
       $cookies.remove('user');
       $rootScope.nameSpace = 'grockr';
-      $location.path('/dash');
+      $location.path('/dash/intro');
     }
   }
 ])
