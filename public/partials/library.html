@@ -16,7 +16,7 @@
 
 
 <div ng-repeat="term in definitions | orderBy: 'word.toString()' | filter:{word:query}">
-  <div class='box text-left'>
+  <div class='animated box text-left zoomInUp'>
     <h5>{{term.word}}</5>
     <hr>
     <blockquote>{{term.definition}}</blockquote>
