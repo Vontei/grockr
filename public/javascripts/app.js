@@ -109,7 +109,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
 
   // $urlRouterProvider.otherwise("home");
-    // $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
 
 });
 
