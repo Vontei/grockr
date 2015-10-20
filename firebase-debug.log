@@ -1,0 +1,18 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      node /usr/local/bin/firebase deploy
+[debug] Platform:     darwin
+[debug] Node Version: v0.12.4
+[debug] Time:         Tue Oct 20 2015 11:47:00 GMT-0600 (MDT)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/firebase/grockr/token?token=XXX 
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/firebase/grockr/token?token=XXX 
+[debug] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'grockr'...
+[info] 
+[info] i  deploying hosting
+[info] i  preparing public directory for upload...
+[debug] >>> HTTP REQUEST PUT https://deploy.firebase.com/firebase/grockr/uploads/-K15M7IKbLLPerxKGhvu?token=XXX&fileCount=1077&message= 
+[debug] <<< HTTP RESPONSE 200

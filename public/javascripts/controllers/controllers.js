@@ -23,7 +23,7 @@ app.controller('stockController', ['$scope','$http','$localStorage','$cookies','
       post(order);
     }
     var post = function(order) {
-       $http.post('https://localhost:8080/buy', order).then(function (data) {
+       $http.post('http://localhost:8080/buy', order).then(function (data) {
         $location.path('/dash/orders')
       })
     }
@@ -44,7 +44,7 @@ app.controller('stock2Controller', ['$scope','$localStorage','$cookies',"$http",
       post(order);
     }
     var post = function(order) {
-       $http.post('https://localhost:8080/buy', order).then(function (data) {
+       $http.post('http://localhost:8080/buy', order).then(function (data) {
         $location.path('/dash/orders')
       })
     }
@@ -54,7 +54,7 @@ app.controller('stock2Controller', ['$scope','$localStorage','$cookies',"$http",
 
 app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage","$location",
   function ($scope, $http, $cookies, $localStorage, $location) {
-    $http.get('https://localhost:8080/orders/'+ $cookies.get('id')).then(function (data) {
+    $http.get('http://localhost:8080/orders/'+ $cookies.get('id')).then(function (data) {
       var list = data.data;
       var buyTotal = 0;
       var currentTotal = 0
@@ -84,7 +84,7 @@ app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage
       $scope.accountDiff = accountDiff;
       $scope.orders = orders;
     }).then(function () {
-      $http.get('https://localhost:8080/balance/'+ $cookies.get('id')).then(function (data) {
+      $http.get('http://localhost:8080/balance/'+ $cookies.get('id')).then(function (data) {
         $scope.balance = data.data;
       })
     })
@@ -102,7 +102,7 @@ app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage
         accountid: $cookies.get('id'),
         balance: orderTotal
       }
-      $http.post('https://localhost:8080/sell', order).then(function (data) {
+      $http.post('http://localhost:8080/sell', order).then(function (data) {
         var list = data.data;
         var orders = list.map(function (e) {
           var priceNow;
@@ -125,7 +125,7 @@ app.controller('ordersController', ["$scope", "$http" ,"$cookies","$localStorage
         })
         $scope.orders = orders;
       }).then(function () {
-        $http.get('https://localhost:8080/balance/'+ $cookies.get('id')).then(function (data) {
+        $http.get('http://localhost:8080/balance/'+ $cookies.get('id')).then(function (data) {
           $scope.balance = data.data;
           // $location.path('/orders')
       })
@@ -157,7 +157,7 @@ app.controller('sentimentController', ['$scope','$http',
 
 app.controller('storageController', ['$scope','$http','$localStorage',
   function($scope, $http, $localStorage){
-      $http.get('https://localhost:8080/yahoo').then(function (data) {
+      $http.get('http://localhost:8080/yahoo').then(function (data) {
           $localStorage.msft = data.data[0];
           $localStorage.aapl = data.data[1];
           $localStorage.goog = data.data[2];
@@ -209,7 +209,7 @@ app.controller('cookieController', [
 // ])
 app.controller('test', ["$scope", "$http","$location",
   function($scope, $http, $location){
-      $http.get('https://grockr.herokuapp.com/API').then(function (data) {
+      $http.get('http://grockr.herokuapp.com/API').then(function (data) {
         console.log(data)
       })
     }
@@ -222,7 +222,7 @@ app.controller('test', ["$scope", "$http","$location",
 app.controller('newAccount', ["$scope", "$http","$location",
   function($scope, $http, $location){
     $scope.createAccount = function(credentials){
-      $http.post('https://localhost:8080/account/new', credentials).then(function (data) {
+      $http.post('http://localhost:8080/account/new', credentials).then(function (data) {
         $location.path('/dash/portal/login')
       })
     }
@@ -243,7 +243,7 @@ app.controller('logOutController', ["$scope",'$localStorage','$location','$cooki
 app.controller('loginController', ["$scope", "$http",'$location','$localStorage','$cookies','$rootScope',
   function($scope, $http, $location, $localStorage, $cookies, $rootScope){
     $scope.login= function (credentials) {
-      $http.post('https://localhost:8080/account/login', credentials).then(function (data) {
+      $http.post('http://localhost:8080/account/login', credentials).then(function (data) {
         $cookies.put('id', data.data[0].id)
         $cookies.put('user', data.data[0].userName)
         $rootScope.nameSpace = data.data[0].userName;
@@ -276,7 +276,7 @@ app.controller('dashController', ["$scope","$localStorage","$cookies","$rootScop
 app.controller('newOrder', ["$scope", "$http","$location",
   function($scope, $http, $location){
     $scope.createOrder = function(credentials){
-      $http.post('https://localhost:8080/buy', credentials).then(function (data) {
+      $http.post('http://localhost:8080/buy', credentials).then(function (data) {
         $location.path('/dash')
       })
     }
@@ -313,7 +313,7 @@ app.controller('whatIfController', ["$scope",
 
 app.controller("highchart", function ($scope) {
   $scope.chart = $(function () {
-      $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function (data) {
+      $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function (data) {
           $('#CHARTcontainer').highcharts('StockChart', {
               rangeSelector : {
                   selected : 1
@@ -346,7 +346,7 @@ app.controller("highchart", function ($scope) {
       });
   });
   $scope.chart3 = $(function () {
-      $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=msft-c.json&callback=?', function (data) {
+      $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=msft-c.json&callback=?', function (data) {
           $('#CHART3container').highcharts('StockChart', {
               rangeSelector : {
                   selected : 1
@@ -383,7 +383,7 @@ app.controller("highchart", function ($scope) {
 
 app.controller("highchart2", function ($scope) {
   $scope.chart2 = $(function () {
-      $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=goog-c.json&callback=?', function (data) {
+      $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=goog-c.json&callback=?', function (data) {
           $('#CHART2container').highcharts('StockChart', {
               rangeSelector : {
                   selected : 1
